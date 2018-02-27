@@ -9,12 +9,14 @@
     <small><%=event.dates.start.localDate %></small>
     <input href="events/<%=event.id%>" class='btn save-link' type="button" value="Add to Saved Events">
   </h2>
-  <h6><%= event._embedded.venues[0].name %></h6>
+  <h6><a href="/events/results?keyword=<%=event._embedded.venues[0].name%>"><%= event._embedded.venues[0].name %></a> &nbsp;&nbsp;&nbsp;(<%= event._embedded.venues[0].city.name %>, <%= event._embedded.venues[0].state.stateCode %> )</h6>
   <h5>Feautured:</h5>
   <ul>
+  <% if (event._embedded.attractions) { %>
     <% for (i = 0; i < event._embedded.attractions.length; i++) { %>
-        <li><%= event._embedded.attractions[i].name %></li>
+        <a href="/events/results?keyword=<%=event._embedded.attractions[i].name%>"><li><%= event._embedded.attractions[i].name %></li></a>
     <% }; %>
+  <% } %>
   </ul>
 <% }); %>
 
