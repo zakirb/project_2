@@ -1,8 +1,9 @@
 var express = require('express');
-var db = require('../models'); //brant's change
+var db = require('../models');
 var passport = require('../config/ppConfig');
 var router = express.Router();
 var request = require('request');
+var isLoggedIn = require('../middleware/isLoggedIn');
 
 router.get('/', function(req, res) {
   res.render('events/search');
@@ -22,6 +23,11 @@ router.get('/results', function(req, res) {
         console.log('SEARCH FAILED');
       }
   });
+});
+
+router.get('/favorites', isLoggedIn, function(req, res) {
+  var data = 'All my favorites'; //placeholder
+  res.render('events/favorites', {data:data})
 });
 
 router.post('/events/:eventId', function(req, res) {

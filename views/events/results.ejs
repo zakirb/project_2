@@ -10,7 +10,7 @@
     <input href="events/<%=event.id%>" class='btn save-link' type="button" value="Add to Saved Events">
   </h2>
   <h6><%= event._embedded.venues[0].name %></h6>
-  <h5>Artists:</h5>
+  <h5>Feautured:</h5>
   <ul>
     <% for (i = 0; i < event._embedded.attractions.length; i++) { %>
         <li><%= event._embedded.attractions[i].name %></li>
