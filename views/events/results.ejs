@@ -1,0 +1,35 @@
+<h3> Results </h3>
+
+
+<% results.forEach(function(event) { %>
+
+  <a href="<%=event.url%>"><img style='width:300px' src="<%= event.images[3].url%>"></a>
+  <h2>
+    <%= event.name %>
+    <small><%=event.dates.start.localDate %></small>
+    <input href="events/<%=event.id%>" class='btn save-link' type="button" value="Add to Saved Events">
+  </h2>
+  <h6><%= event._embedded.venues[0].name %></h6>
+  <h5>Artists:</h5>
+  <ul>
+    <% for (i = 0; i < event._embedded.attractions.length; i++) { %>
+        <li><%= event._embedded.attractions[i].name %></li>
+    <% }; %>
+  </ul>
+<% }); %>
+
+<script>
+  $('.save-link').on('click', function(e) {
+    e.preventDefault();
+    var thisUrl = $(this).attr('href');
+    console.log(thisUrl);
+
+    $.ajax({
+      type: "POST",
+      url: thisUrl,
+      // data: data,
+      // success: success,
+      dataType: 'JSON'
+    });
+  });
+</script>
