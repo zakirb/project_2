@@ -26,13 +26,17 @@ router.get('/results', function(req, res) {
 });
 
 router.get('/favorites', isLoggedIn, function(req, res) {
-  var data = 'All my favorites'; //placeholder
-  res.render('events/favorites', {data:data})
+  db.user.find({
+    where: {id:req.user.id},
+    include: [db.event]
+  }).then(function(user) {
+    console.log(user.events);
+    res.render('events/favorites', {data: user.events});
+  });
 });
 
-router.post('/favorites', function(req, res) {
+router.post('/favorites', isLoggedIn, function(req, res) {
   console.log('IN THE FAVORITES /POST ROUTE...');
-
   db.event.findOrCreate({
     where: {ticketmaster_id:req.body.eventId},
     defaults: {
@@ -44,14 +48,17 @@ router.post('/favorites', function(req, res) {
       location: req.body.location,
     }
   }).spread(function(event, created) {
-    db.user.findOne({
-      where: {id:req.user.id}
-    }).then(function(user) {
-      event.addUser(user);
-    });
+    if (created) {
+      db.user.findOne({
+        where: {id:req.user.id}
+      }).then(function(user) {
+        event.addUser(user);
+      });
+    } else {
+      console.log('FUNFUNSINSDIJD');
+    res.redirect('/events/favorites');
+  }
   });
-
-
 });
 
 
