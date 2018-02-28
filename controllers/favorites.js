@@ -6,8 +6,33 @@ var request = require('request');
 var isLoggedIn = require('../middleware/isLoggedIn');
 
 
+
+router.get('/reccomend', function(req, res) {
+
+
+  var qs = {
+    q: 'kaskade,autograf, bonnaroo music festival',
+    type: 'music',
+    info: 0,
+    k: process.env.TASTE_API_KEY
+  };
+  request({
+    url: 'https://tastedive.com/api/similar',
+    qs: qs
+  }, function(error, response, body) {
+    if (!error && response.statusCode == 200) {
+      var dataObj = JSON.parse(body);
+      res.send(dataObj);
+    } else {
+      res.redirect('/favorites');
+    }
+  });
+});
+
+
+
 router.get('/:ticketmaster_id', isLoggedIn, function(req, res) {
-  var eventUrl = "https://app.ticketmaster.com/discovery/v2/events/" + req.params.ticketmaster_id + ".json?&apikey=" + process.env.TMAPI_KEY;
+  var eventUrl = "https://app.ticketmaster.com/discovery/v2/events/" + req.params.ticketmaster_id + ".json?&apikey=" + process.env.TM_API_KEY;
 
   request(eventUrl, function(error, response, body) {
     if (!error && response.statusCode == 200 && (JSON.parse(body)._embedded)) {
@@ -18,8 +43,27 @@ router.get('/:ticketmaster_id', isLoggedIn, function(req, res) {
         artists.forEach(function(artist) {
           artistList.push(artist.name);
         });
-        console.log(artistList);
-        res.render('favorites/show', {event:dataObj});
+
+        
+        var qs = {
+          q: artistList.join(','),
+          type: 'music',
+          info: 0,
+          k: process.env.TASTE_API_KEY
+        };
+        request({
+          url: 'https://tastedive.com/api/similar',
+          qs: qs
+        }, function(error, response, body) {
+          if (!error && response.statusCode == 200) {
+            var recs = JSON.parse(body);
+            res.send(recs.Similar.Results);
+            // res.render('favorites/show', {data:recs});
+          } else {
+            res.redirect('/favorites');
+          }
+        });
+
       } else {
         req.flash('error', 'Error finding event information');
         res.redirect('/favorites');
