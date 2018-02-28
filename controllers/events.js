@@ -32,7 +32,25 @@ router.get('/favorites', isLoggedIn, function(req, res) {
 
 router.post('/favorites', function(req, res) {
   console.log('IN THE FAVORITES /POST ROUTE...');
-  console.log(req.body);
+
+  db.event.findOrCreate({
+    where: {ticketmaster_id:req.body.eventId},
+    defaults: {
+      name: req.body.name,
+      purchase_url: req.body.purchaseUrl,
+      image_url: req.body.imageUrl,
+      date: req.body.date,
+      venue: req.body.venue,
+      location: req.body.location,
+    }
+  }).spread(function(event, created) {
+    db.user.findOne({
+      where: {id:req.user.id}
+    }).then(function(user) {
+      event.addUser(user);
+    });
+  });
+
 
 });
 
