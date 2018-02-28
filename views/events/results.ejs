@@ -7,7 +7,19 @@
   <h2>
     <%= event.name %>
     <small><%=event.dates.start.localDate %></small>
-    <input href="events/<%=event.id%>" class='btn save-link' type="button" value="Add to Saved Events">
+    <div style='display:inline-block'>
+      <form action="/events/favorites" method='post'>
+        <input type='submit' class='btn save-link' value="Add to Saved Events">
+        <input type="hidden" name='eventId' value="<%=event.id%>">
+        <input type="hidden" name='name' value="<%=event.name%>">
+        <input type="hidden" name='purchaseUrl' value="<%=event.url%>">
+        <input type="hidden" name='imageUrl' value="<%=event.images[3].url%>">
+        <input type="hidden" name='date' value="<%=event.dates.start.localDate%>">
+        <input type="hidden" name='venue' value="<%=event._embedded.venues[0].name%>">
+        <input type="hidden" name='location' value="<%=event._embedded.venues[0].city.name%>, <%= event._embedded.venues[0].state.stateCode %>">
+      </form>
+    </div>
+
   </h2>
   <h6><a href="/events/results?keyword=<%=event._embedded.venues[0].name%>"><%= event._embedded.venues[0].name %></a> &nbsp;&nbsp;&nbsp;(<%= event._embedded.venues[0].city.name %>, <%= event._embedded.venues[0].state.stateCode %> )</h6>
   <h5>Feautured:</h5>
@@ -19,19 +31,3 @@
   <% } %>
   </ul>
 <% }); %>
-
-<script>
-  $('.save-link').on('click', function(e) {
-    e.preventDefault();
-    var thisUrl = $(this).attr('href');
-    console.log(thisUrl);
-
-    $.ajax({
-      type: "POST",
-      url: thisUrl,
-      // data: data,
-      // success: success,
-      dataType: 'JSON'
-    });
-  });
-</script>

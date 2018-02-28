@@ -11,11 +11,11 @@ router.get('/', function(req, res) {
 
 router.get('/results', function(req, res) {
   var eventUrl = "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&size=20&apikey=" + process.env.TMAPI_KEY + '&sort=date,asc&keyword=' + req.query.keyword;
-  console.log(eventUrl);
+
   request(eventUrl, function(error, response, body) {
     if (!error && response.statusCode == 200 && (JSON.parse(body)._embedded)) {
         var dataObj = JSON.parse(body);
-        console.log(dataObj._embedded.events);
+        // console.log(dataObj._embedded.events);
         res.render('events/results', {results:dataObj._embedded.events});
       } else {
         req.flash('error', 'Search failed, please try again.');
@@ -30,9 +30,9 @@ router.get('/favorites', isLoggedIn, function(req, res) {
   res.render('events/favorites', {data:data})
 });
 
-router.post('/events/:eventId', function(req, res) {
-  console.log('IN THE EVENTS /POST ROUTE...');
-  console.log(req.params.eventId);
+router.post('/favorites', function(req, res) {
+  console.log('IN THE FAVORITES /POST ROUTE...');
+  console.log(req.body);
 
 });
 
