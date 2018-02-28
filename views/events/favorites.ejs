@@ -7,7 +7,7 @@
     <%= event.name %>
     <small><%=event.date %></small>
   </h2>
-  <h6><a href="/events/results?keyword=<%=event.venue%>"><%= event.venue %></a> &nbsp;&nbsp;&nbsp;(<%= event.location %> )</h6>
+  <h6><%= event.venue %> &nbsp;&nbsp;&nbsp;(<%= event.location %> )</h6>
   <div>
     <a href="<%=event.purchase_url%>"><div class='btn'>Purchase Tickets</div></a>
     <div href="/events/favorites/<%=event.ticketmaster_id%>" class='btn delete-link'>Delete From Favorites</div>

@@ -1,8 +1,5 @@
 <h3> Results </h3>
-
-
 <% results.forEach(function(event) { %>
-
   <a href="<%=event.url%>"><img style='width:300px' src="<%= event.images[3].url%>"></a>
   <h2>
     <%= event.name %>
@@ -19,15 +16,17 @@
         <input type="hidden" name='location' value="<%=event._embedded.venues[0].city.name%>, <%= event._embedded.venues[0].state.stateCode %>">
       </form>
     </div>
-
   </h2>
   <h6><a href="/events/results?keyword=<%=event._embedded.venues[0].name%>"><%= event._embedded.venues[0].name %></a> &nbsp;&nbsp;&nbsp;(<%= event._embedded.venues[0].city.name %>, <%= event._embedded.venues[0].state.stateCode %> )</h6>
-  <h5>Feautured:</h5>
-  <ul>
+
   <% if (event._embedded.attractions) { %>
-    <% for (i = 0; i < event._embedded.attractions.length; i++) { %>
-        <a href="/events/results?keyword=<%=event._embedded.attractions[i].name%>"><li><%= event._embedded.attractions[i].name %></li></a>
-    <% }; %>
+    <% if (event._embedded.attractions.length > 1 && (event.classifications[0].segment.name == "Music")) { %>
+      <h5>Feautured:</h5>
+      <ul>
+        <% for (i = 1; i < event._embedded.attractions.length; i++) { %>
+          <a href="/events/results?keyword=<%=event._embedded.attractions[i].name%>"><li><%= event._embedded.attractions[i].name %></li></a>
+        <% }; %>
+      </ul>
+    <% } %>
   <% } %>
-  </ul>
 <% }); %>
