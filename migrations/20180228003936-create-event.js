@@ -14,10 +14,19 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
-      venue: {
+      purchase_url: {
+        type: Sequelize.STRING
+      },
+      image_url: {
         type: Sequelize.STRING
       },
       date: {
+        type: Sequelize.STRING
+      },
+      venue: {
+        type: Sequelize.STRING
+      },
+      location: {
         type: Sequelize.STRING
       },
       createdAt: {
