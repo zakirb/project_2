@@ -10,7 +10,7 @@
     <div style='display:inline-block'>
       <form action="/events/favorites" method='post'>
         <input type='submit' class='btn save-link' value="Add to Saved Events">
-        <input type="hidden" name='eventId' value="<%=event.id%>">
+        <input type="hidden" name='ticketmasterId' value="<%=event.id%>">
         <input type="hidden" name='name' value="<%=event.name%>">
         <input type="hidden" name='purchaseUrl' value="<%=event.url%>">
         <input type="hidden" name='imageUrl' value="<%=event.images[3].url%>">

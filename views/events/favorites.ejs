@@ -1,1 +1,29 @@
-<h1><%= data %></h1>
+<h1>My Favorites</h1>
+
+<% events.forEach(function(event) { %>
+
+  <a href="/events/<%=event.ticketmaster_id%>"><img style='width:300px' src="<%= event.image_url%>"></a>
+  <h2>
+    <%= event.name %>
+    <small><%=event.date %></small>
+  </h2>
+  <h6><a href="/events/results?keyword=<%=event.venue%>"><%= event.venue %></a> &nbsp;&nbsp;&nbsp;(<%= event.location %> )</h6>
+  <div>
+    <a href="<%=event.purchase_url%>"><div class='btn'>Purchase Tickets</div></a>
+    <div href="/events/favorites/<%=event.ticketmaster_id%>" class='btn delete-link'>Delete From Favorites</div>
+  </div>
+<% }); %>
+
+<script>
+$('.delete-link').on('click', function() {
+  var thisUrl = $(this).attr('href');
+  console.log(thisUrl);
+  $.ajax({
+    type: "DELETE",
+    url: thisUrl
+    // success: success,
+  }).done(function() {
+    window.location = '/events/favorites';
+  });
+});
+</script>

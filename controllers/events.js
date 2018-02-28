@@ -25,20 +25,48 @@ router.get('/results', function(req, res) {
   });
 });
 
+router.delete('/favorites/:ticketmaster_id', isLoggedIn, function(req, res) {
+  console.log('IN THE DELETE /favorites/ID route...');
+  db.event.findOne({
+    where: {ticketmaster_id : req.params.ticketmaster_id},
+    include: [{model:db.user, where: {id:req.user.id}}]
+  })
+  .then(function(event) {
+    event.removeUser(event.users[0])
+  })
+  .then(function() {
+    db.event.findOne({
+    where: {ticketmaster_id:req.params.ticketmaster_id},
+    include: [db.user]
+    })
+    .then(function(event) {
+      console.log(event);
+      if (!event.users[0]) {
+        event.destroy();
+        console.log('DELETED EVENT');
+        res.send('DELETED EVENT');
+      } else {
+        console.log('DIDNT DELETE EVENT BUT RELATION REMOVED');
+        res.send('FAVORITE REMOVED');
+      }
+    });
+  });
+});
+
 router.get('/favorites', isLoggedIn, function(req, res) {
   db.user.find({
     where: {id:req.user.id},
     include: [db.event]
   }).then(function(user) {
-    console.log(user.events);
-    res.render('events/favorites', {data: user.events});
+    // console.log(user.events);
+    res.render('events/favorites', {events: user.events});
   });
 });
 
 router.post('/favorites', isLoggedIn, function(req, res) {
   console.log('IN THE FAVORITES /POST ROUTE...');
   db.event.findOrCreate({
-    where: {ticketmaster_id:req.body.eventId},
+    where: {ticketmaster_id:req.body.ticketmasterId},
     defaults: {
       name: req.body.name,
       purchase_url: req.body.purchaseUrl,
@@ -53,10 +81,17 @@ router.post('/favorites', isLoggedIn, function(req, res) {
         where: {id:req.user.id}
       }).then(function(user) {
         event.addUser(user);
+        console.log('CREATED');
+        res.redirect('/events/favorites');
       });
     } else {
-      console.log('FUNFUNSINSDIJD');
-    res.redirect('/events/favorites');
+      db.user.findOne({
+        where: {id:req.user.id}
+      }).then(function(user) {
+        event.addUser(user);
+        console.log('NOT CREATED BUT USER ADDED');
+        res.redirect('/events/favorites');
+      });
   }
   });
 });
