@@ -2,7 +2,7 @@
 
 <% events.forEach(function(event) { %>
 
-  <a href="/events/<%=event.ticketmaster_id%>"><img style='width:300px' src="<%= event.image_url%>"></a>
+  <a href="/favorites/<%=event.ticketmaster_id%>"><img style='width:300px' src="<%= event.image_url%>"></a>
   <h2>
     <%= event.name %>
     <small><%=event.date %></small>
@@ -10,7 +10,7 @@
   <h6><%= event.venue %> &nbsp;&nbsp;&nbsp;(<%= event.location %> )</h6>
   <div>
     <a href="<%=event.purchase_url%>"><div class='btn'>Purchase Tickets</div></a>
-    <div href="/events/favorites/<%=event.ticketmaster_id%>" class='btn delete-link'>Delete From Favorites</div>
+    <div href="/favorites/<%=event.ticketmaster_id%>" class='btn delete-link'>Delete From Favorites</div>
   </div>
 <% }); %>
 
@@ -23,7 +23,7 @@ $('.delete-link').on('click', function() {
     url: thisUrl
     // success: success,
   }).done(function() {
-    window.location = '/events/favorites';
+    window.location = '/favorites';
   });
 });
 </script>

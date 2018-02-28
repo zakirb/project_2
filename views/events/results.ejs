@@ -5,7 +5,7 @@
     <%= event.name %>
     <small><%=event.dates.start.localDate %></small>
     <div style='display:inline-block'>
-      <form action="/events/favorites" method='post'>
+      <form action="/favorites" method='post'>
         <input type='submit' class='btn save-link' value="Add to Saved Events">
         <input type="hidden" name='ticketmasterId' value="<%=event.id%>">
         <input type="hidden" name='name' value="<%=event.name%>">
@@ -21,9 +21,9 @@
 
   <% if (event._embedded.attractions) { %>
     <% if (event._embedded.attractions.length > 1 && (event.classifications[0].segment.name == "Music")) { %>
-      <h5>Feautured:</h5>
+      <h5>Featured:</h5>
       <ul>
-        <% for (i = 1; i < event._embedded.attractions.length; i++) { %>
+        <% for (i = 0; i < event._embedded.attractions.length; i++) { %>
           <a href="/events/results?keyword=<%=event._embedded.attractions[i].name%>"><li><%= event._embedded.attractions[i].name %></li></a>
         <% }; %>
       </ul>
