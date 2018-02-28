@@ -7,13 +7,28 @@ var isLoggedIn = require('../middleware/isLoggedIn');
 
 
 router.get('/:ticketmaster_id', isLoggedIn, function(req, res) {
-  db.event.findOne({
-    where: {ticketmaster_id : req.params.ticketmaster_id},
-  })
-  .then(function(event) {
-    res.render('favorites/show', {event:event});
+  var eventUrl = "https://app.ticketmaster.com/discovery/v2/events/" + req.params.ticketmaster_id + ".json?&apikey=" + process.env.TMAPI_KEY;
+
+  request(eventUrl, function(error, response, body) {
+    if (!error && response.statusCode == 200 && (JSON.parse(body)._embedded)) {
+        var dataObj = JSON.parse(body);
+        console.log(dataObj);
+        var artistList = [];
+        var artists = dataObj._embedded.attractions;
+        artists.forEach(function(artist) {
+          artistList.push(artist.name);
+        });
+        console.log(artistList);
+        res.render('favorites/show', {event:dataObj});
+      } else {
+        req.flash('error', 'Error finding event information');
+        res.redirect('/favorites');
+        console.log('SEARCH FAILED');
+      }
   });
 });
+
+
 
 router.delete('/:ticketmaster_id', isLoggedIn, function(req, res) {
   console.log('IN THE DELETE /favorites/ID route...');
