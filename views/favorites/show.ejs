@@ -22,7 +22,7 @@
   <h2>Reccomended artists based on your event choice</h2>
   <ul>
     <% artists.forEach(function(artist) { %>
-      <a href="/events/results?keyword=<%=artist.Name%>"><li><%=artist.Name%></li></a>
+      <a href="/reccomendations/<%=artist.Name%>"><li><%=artist.Name%></li></a>
     <% }) %>
   </ul>
 </div>

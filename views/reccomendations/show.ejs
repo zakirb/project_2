@@ -1,0 +1,14 @@
+<h1>Artist</h1>
+<p><%= info.Name %></p>
+<div>
+  <iframe width="560" height="315" src="<%=info.yUrl%>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>
+<h6>Info:</h6>
+<p><%=info.wTeaser%></p>
+
+<h3>similar artists</h3>
+<ul>
+  <% artists.forEach(function (artist) { %>
+    <li><a href="/reccomendations/<%=artist.Name%>"><%=artist.Name%></a><a href="/events/results?keyword=<%=artist.Name%>"><div class='btn'>Search Ticketmaster for events</div></a></li>
+<%  }); %>
+</ul>

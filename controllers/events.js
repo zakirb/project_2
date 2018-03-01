@@ -18,7 +18,7 @@ router.get('/results', function(req, res) {
         // console.log(dataObj._embedded.events);
         res.render('events/results', {results:dataObj._embedded.events});
       } else {
-        req.flash('error', 'Search failed, please try again.');
+        req.flash('error', 'No events found, please try again');
         res.redirect('/events');
         console.log('SEARCH FAILED');
       }
