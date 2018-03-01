@@ -7,27 +7,27 @@ var isLoggedIn = require('../middleware/isLoggedIn');
 
 
 
-router.get('/reccomend', function(req, res) {
-
-
-  var qs = {
-    q: 'kaskade,autograf, bonnaroo music festival',
-    type: 'music',
-    info: 0,
-    k: process.env.TASTE_API_KEY
-  };
-  request({
-    url: 'https://tastedive.com/api/similar',
-    qs: qs
-  }, function(error, response, body) {
-    if (!error && response.statusCode == 200) {
-      var dataObj = JSON.parse(body);
-      res.send(dataObj);
-    } else {
-      res.redirect('/favorites');
-    }
-  });
-});
+// router.get('/reccomend', function(req, res) {
+//
+//
+//   var qs = {
+//     q: 'kaskade,autograf, bonnaroo music festival',
+//     type: 'music',
+//     info: 0,
+//     k: process.env.TASTE_API_KEY
+//   };
+//   request({
+//     url: 'https://tastedive.com/api/similar',
+//     qs: qs
+//   }, function(error, response, body) {
+//     if (!error && response.statusCode == 200) {
+//       var dataObj = JSON.parse(body);
+//       res.send(dataObj);
+//     } else {
+//       res.redirect('/favorites');
+//     }
+//   });
+// });
 
 
 
@@ -36,15 +36,13 @@ router.get('/:ticketmaster_id', isLoggedIn, function(req, res) {
 
   request(eventUrl, function(error, response, body) {
     if (!error && response.statusCode == 200 && (JSON.parse(body)._embedded)) {
-        var dataObj = JSON.parse(body);
-        console.log(dataObj);
+        var eventData = JSON.parse(body);
+        // console.log(eventData);
         var artistList = [];
-        var artists = dataObj._embedded.attractions;
+        var artists = eventData._embedded.attractions;
         artists.forEach(function(artist) {
           artistList.push(artist.name);
         });
-
-        
         var qs = {
           q: artistList.join(','),
           type: 'music',
@@ -57,8 +55,7 @@ router.get('/:ticketmaster_id', isLoggedIn, function(req, res) {
         }, function(error, response, body) {
           if (!error && response.statusCode == 200) {
             var recs = JSON.parse(body);
-            res.send(recs.Similar.Results);
-            // res.render('favorites/show', {data:recs});
+            res.render('favorites/show', {artists:recs.Similar.Results, event:eventData});
           } else {
             res.redirect('/favorites');
           }

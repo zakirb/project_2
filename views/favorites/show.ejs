@@ -1,1 +1,30 @@
-<h1><%= data %></h1>
+<div></div>
+  <a href="<%=event.url%>"><img style='width:300px' src="<%= event.images[3].url%>"></a>
+  <h2>
+    <%= event.name %>
+    <small><%=event.dates.start.localDate %></small>
+  </h2>
+  <h6>
+  <%= event._embedded.venues[0].name %></a> &nbsp;&nbsp;&nbsp;(<%= event._embedded.venues[0].city.name %>, <%= event._embedded.venues[0].state.stateCode %> )</h6>
+  <% if (event._embedded.attractions) { %>
+    <% if (event._embedded.attractions.length > 1 && (event.classifications[0].segment.name == "Music")) { %>
+      <h5>Featured:</h5>
+      <ul>
+        <% for (i = 0; i < event._embedded.attractions.length; i++) { %>
+          <li><%= event._embedded.attractions[i].name %></li>
+        <% }; %>
+      </ul>
+    <% } %>
+  <% } %>
+</div>
+<% if (artists) { %>
+<div>
+  <h2>Reccomended artists based on your event choice</h2>
+  <ul>
+    <% artists.forEach(function(artist) { %>
+      <a href="/events/results?keyword=<%=artist.Name%>"><li><%=artist.Name%></li></a>
+    <% }) %>
+  </ul>
+</div>
+
+<% } %>
