@@ -1,0 +1,29 @@
+<h2>Profile Page</h2>
+
+<a href="/">Home</a>
+
+<form id="zipcodeform" action="/profile">
+<h3><%= user.name %> <button type='submit' class='btn'>Save</button></h3>
+<ul>
+  <li>Zip Code: <input name='zipcode' type="text" value="<%=user.zipcode%>" placeholder="Enter Zip Code"></li>
+</ul>
+</form>
+
+
+<script>
+  $('#zipcodeform').on('submit', function(e) {
+    e.preventDefault();
+    var zipcodeForm = $(this)
+    var putUrl = zipcodeForm.attr('action');
+    var formData = zipcodeForm.serialize();
+    console.log('DADADADADADDA');
+    console.log(formData);
+    $.ajax({
+      type:'put',
+      url: putUrl,
+      data: formData
+    }).done(function() {
+      window.location = '/profile';
+    });
+  });
+</script>

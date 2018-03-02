@@ -1,7 +1,13 @@
 <h3>Search for events</h3>
 <div>
   <form action='/events/results'>
-  <input type="text" name='keyword' placeholder="Enter a search term">
-  <input type="submit" value='Search'>
+    <input type="text" name='keyword' placeholder="Enter a search term"></br>
+  <% if (user) { %>
+    <input type="text" name='zipcode' value="<%=user.zipcode%>" placeholder="Enter a Zipcode"><label for="zipcode">Optional</label></br>
+  <% } else { %>
+    <input type="text" name='zipcode' placeholder="Enter a Zipcode"><label for="zipcode">Optional</label></br>
+  <% }; %>
+    <input type="text" name='radius' placeholder="Enter a Search Radius"><label for="radius">Optional</label></br>
+    <input type="submit" value='Search'>
   </form>
 </div>

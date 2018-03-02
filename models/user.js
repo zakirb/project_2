@@ -27,6 +27,15 @@ module.exports = (sequelize, DataTypes) => {
           msg: "Password must be at least 8 characters"
         }
       }
+    },
+    zipcode: {
+      type: DataTypes.INTEGER,
+      validate: {
+        is: {
+          args: /^\d{5}$/,
+          msg: 'Zipcode must be 5 digits'
+        }
+      }
     }
   }, {
     hooks: {

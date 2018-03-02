@@ -1,3 +1,13 @@
 <h2>Profile Page</h2>
 
 <a href="/">Home</a>
+
+<h3><%= user.name %> <small class='btn'><a href="/profile/edit">edit profile</small></a></h3>
+
+<ul>
+  <li>Zip Code:  <% if (user.zipcode) { %>
+    <%=user.zipcode%>
+  <% } else { %>
+    Not entered
+  <% }; %></li>
+</ul>

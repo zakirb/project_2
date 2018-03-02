@@ -6,12 +6,16 @@ var request = require('request');
 var isLoggedIn = require('../middleware/isLoggedIn');
 
 router.get('/', function(req, res) {
-  res.render('events/search');
+  var data;
+  if (req.user) {
+    data = req.user
+  }
+  res.render('events/search', {user: data});
 });
 
 router.get('/results', function(req, res) {
   var eventUrl = "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&size=20&apikey=" + process.env.TM_API_KEY + '&segmentName=music&sort=date,asc&keyword=' + req.query.keyword;
-
+  
   request(eventUrl, function(error, response, body) {
     if (!error && response.statusCode == 200 && (JSON.parse(body)._embedded)) {
         var dataObj = JSON.parse(body);

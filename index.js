@@ -7,6 +7,7 @@ var session = require('express-session');
 var passport = require('./config/ppConfig');
 var isLoggedIn = require('./middleware/isLoggedIn');
 var request = require('request');
+var db = require('./models');
 
 var app = express();
 
@@ -39,9 +40,26 @@ app.get('/', function(req, res) {
   res.render('index');
 });
 
-
 app.get('/profile', isLoggedIn, function(req, res) {
-  res.render('profile');
+  var user = req.user;
+  res.render('profile', {user:user});
+});
+
+app.get('/profile/edit', isLoggedIn, function(req, res) {
+  var user = req.user;
+  res.render('editprofile', {user:user});
+});
+
+app.put('/profile', isLoggedIn, function(req, res) {
+  db.user.update({
+    zipcode: req.body.zipcode
+  }, {
+    where: {
+      id:req.user.id
+    }
+  }).then(function(user) {
+    res.render('profile', {user:user});
+  });
 });
 
 app.use('/auth', require('./controllers/auth'));

@@ -6,31 +6,6 @@ var request = require('request');
 var isLoggedIn = require('../middleware/isLoggedIn');
 
 
-
-// router.get('/reccomend', function(req, res) {
-//
-//
-//   var qs = {
-//     q: 'kaskade,autograf, bonnaroo music festival',
-//     type: 'music',
-//     info: 0,
-//     k: process.env.TASTE_API_KEY
-//   };
-//   request({
-//     url: 'https://tastedive.com/api/similar',
-//     qs: qs
-//   }, function(error, response, body) {
-//     if (!error && response.statusCode == 200) {
-//       var dataObj = JSON.parse(body);
-//       res.send(dataObj);
-//     } else {
-//       res.redirect('/favorites');
-//     }
-//   });
-// });
-
-
-
 router.get('/:ticketmaster_id', isLoggedIn, function(req, res) {
   var eventUrl = "https://app.ticketmaster.com/discovery/v2/events/" + req.params.ticketmaster_id + ".json?&apikey=" + process.env.TM_API_KEY;
 
