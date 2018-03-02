@@ -35,7 +35,7 @@ router.get('/:ticketmaster_id', isLoggedIn, function(req, res) {
   var eventUrl = "https://app.ticketmaster.com/discovery/v2/events/" + req.params.ticketmaster_id + ".json?&apikey=" + process.env.TM_API_KEY;
 
   request(eventUrl, function(error, response, body) {
-    if (!error && response.statusCode == 200 && (JSON.parse(body)._embedded)) {
+    if (!error && response.statusCode == 200 && (JSON.parse(body)._embedded.attractions)) {
         var eventData = JSON.parse(body);
         // console.log(eventData);
         var artistList = [];
@@ -53,7 +53,7 @@ router.get('/:ticketmaster_id', isLoggedIn, function(req, res) {
           url: 'https://tastedive.com/api/similar',
           qs: qs
         }, function(error, response, body) {
-          if (!error && response.statusCode == 200) {
+          if (!error && response.statusCode == 200 && (JSON.parse(body))) {
             var recs = JSON.parse(body);
             res.render('favorites/show', {artists:recs.Similar.Results, event:eventData});
           } else {
@@ -62,7 +62,7 @@ router.get('/:ticketmaster_id', isLoggedIn, function(req, res) {
         });
 
       } else {
-        req.flash('error', 'Error finding event information');
+        req.flash('error', 'No reccomendations available for that event');
         res.redirect('/favorites');
         console.log('SEARCH FAILED');
       }
