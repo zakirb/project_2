@@ -3,13 +3,17 @@
   <form action='/events/results'>
     <input type="text" name='keyword' placeholder="Enter a search term"><label for="keyword">Search by keyword</label></br>
   <% if (user) { %>
-    <input type="text" name='zipcode' value="<%=user.zipcode%>" placeholder="Enter a Zipcode"><label for="zipcode">Zipcode (Optional)</label></br>
-    <input type="text" name='radius' value='40' placeholder="Enter a Search Radius"><label for="radius">Search Radius in Miles(Optional)</label></br>
+      <% if (user.zipcode) { %>
+        <input type="text" name='zipcode' value="<%=user.zipcode%>" placeholder="Enter a Zipcode"><label for="zipcode">Zipcode (Optional)</label></br>
+        <input type="text" name='radius' value='40' placeholder="Enter a Search Radius"><label for="radius">Search Radius in Miles(Optional)</label></br>
+      <%  } else { %>
+        <input type="text" name='zipcode' placeholder="Enter a Zipcode"><label for="zipcode">Optional</label></br>
+        <input type="text" name='radius'  placeholder="Enter a Search Radius"><label for="radius">Optional</label></br>
+      <% }; %>
   <% } else { %>
     <input type="text" name='zipcode' placeholder="Enter a Zipcode"><label for="zipcode">Optional</label></br>
     <input type="text" name='radius'  placeholder="Enter a Search Radius"><label for="radius">Optional</label></br>
   <% }; %>
-
     <input type="submit" value='Search'>
   </form>
 </div>

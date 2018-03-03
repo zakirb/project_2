@@ -17,13 +17,16 @@ router.get('/', function(req, res) {
 
 router.get('/results', function(req, res) {
 
+if (req.query.zipcode) {
   var searchZip = req.query.zipcode;
   if (searchZip.length === 5) {
     var zipData = zipcodes.lookup(searchZip);
     var lat = zipData.latitude;
     var long = zipData.longitude;
     var searchGeohash = Geohash.encode(lat, long, 9);
+
   }
+}
 
   var qs = {
     countryCode: 'US',
