@@ -1,13 +1,19 @@
-<h2>Profile Page</h2>
+<div class='row'>
+  <div class='col-12'>
+    <h2>Profile Page</h2>
+  </div>
+</div>
+<div class='row'>
+  <div class='col'>
+    <form id="zipcodeform" action="/profile">
+      <h3><%= user.name %> <button type='submit' class='btn'>Save</button></h3>
+      <ul>
+        <li>Zip Code: <input name='zipcode' type="text" value="<%=user.zipcode%>" placeholder="Enter Zip Code"></li>
+      </ul>
+    </form>
+  </div>
+</div>
 
-<a href="/">Home</a>
-
-<form id="zipcodeform" action="/profile">
-<h3><%= user.name %> <button type='submit' class='btn'>Save</button></h3>
-<ul>
-  <li>Zip Code: <input name='zipcode' type="text" value="<%=user.zipcode%>" placeholder="Enter Zip Code"></li>
-</ul>
-</form>
 
 
 <script>
