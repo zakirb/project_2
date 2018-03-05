@@ -22,3 +22,10 @@ In order to add a bit of user customization, I had hoped to add a favorite genre
 
 ### Day 6
 Styling, and debugging with Heroku deployment. *(To be continued...)*
+
+# Technologies Used
+* HTML
+* CSS/Bootstrap
+* Javascript/JQUERY
+* Node JS (Express, EJS, and many more packages)
+* Sequelize/Postgres
