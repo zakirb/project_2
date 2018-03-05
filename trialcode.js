@@ -13,3 +13,7 @@ for results.ejs
       dataType: 'JSON'
     });
   });
+
+///show ticketmaster
+
+<a href="/events/results?keyword=<%=artist.Name%>"><div class='btn'>Search Ticketmaster for events</div></a>
