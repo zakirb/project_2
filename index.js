@@ -8,11 +8,13 @@ var passport = require('./config/ppConfig');
 var isLoggedIn = require('./middleware/isLoggedIn');
 var request = require('request');
 var db = require('./models');
+var path = require('path');
 
 var app = express();
 
 app.set('view engine', 'ejs');
 
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(require('morgan')('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(ejsLayouts);
