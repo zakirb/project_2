@@ -1,4 +1,5 @@
-<div>
+<div class='row justify-content-center'>
+  <div class='col-4'>
   <a href="<%=event.url%>"><img style='width:300px' src="<%= event.images[3].url%>"></a>
   <h2>
     <%= event.name %>
@@ -16,15 +17,15 @@
       </ul>
     <% } %>
   <% } %>
-</div>
+
 <% if (artists) { %>
-<div>
-  <h2>Reccomended artists based on your event choice</h2>
+  <h2>Reccomended artists based on your choice</h2>
   <ul>
     <% artists.forEach(function(artist) { %>
       <a href="/reccomendations/<%=artist.Name%>"><li><%=artist.Name%></li></a>
     <% }) %>
   </ul>
+  </div>
 </div>
 
 <% } %>
