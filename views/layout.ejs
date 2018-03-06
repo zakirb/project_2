@@ -4,27 +4,29 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SHOWTIXer</title>
-
-    <!-- Latest compiled and minified CSS & JS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/main.css">
   </head>
   <body>
-
     <div class="container">
+      <div class='row'>
+        <div class='col-12'>
       <h1>SHOWTIXer</h1>
       <% if (currentUser) { %>
         Signed in as <%=currentUser.name%>
       <% } %>
       <% include partials/alerts %>
-    </br>
-      <a href="/">Home</a>
-      <a href="/auth/signup">Signup</a>
-      <a href="/auth/login">Login</a>
-      <a href="/auth/logout">Logout</a>
-      <a href="/profile">Profile</a>
-      <a href="/events">Search</a>
-      <a href="/favorites">My Favorites</a>
+        </div>
+      </div>
+      <div class='navbar'>
+        <a class='navbar-brand' href="/">Home</a>
+        <a class='navbar-brand' href="/auth/signup">Signup</a>
+        <a class='navbar-brand' href="/auth/login">Login</a>
+        <a class='navbar-brand' href="/auth/logout">Logout</a>
+        <a class='navbar-brand' href="/profile">Profile</a>
+        <a class='navbar-brand' href="/events">Search</a>
+        <a class='navbar-brand' href="/favorites">My Favorites</a>
+      </div>
     </div>
 
     <script src="https://code.jquery.com/jquery.js"></script>

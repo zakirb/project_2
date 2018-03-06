@@ -29,3 +29,6 @@ Styling, and debugging with Heroku deployment. *(To be continued...)*
 * Javascript/JQUERY
 * Node JS (Express, EJS, and many more packages)
 * Sequelize/Postgres
+
+## Challenges
+I really had hoped to add more search parameters and artist recc
