@@ -1,11 +1,20 @@
 #outerbody {
-background-image: linear-gradient(to right top,  rgba(120,120,120,0.9), rgba(140,140,140,.7), rgba(120,120,120,0.9) );
 height: 100%;
 min-height: 100vh;
 }
 
+.blue, .blue a{
+  color: white;
+}
+
+.blue {
+  background-color: rgba(0,154,226,1);
+}
+
 #innerbody {
   width: 100vw;
+  background-color: grey;
+  min-height: 100vh;
 }
 
 .background-1 {
@@ -46,7 +55,7 @@ a {
   margin:4px;
   padding: 5px 15px;
   border-radius: 5px;
-  background-color: rgba(245,245,245,0.5);
+  background-color: rgb(0,133,196);
 }
 
 .input-block {
