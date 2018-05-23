@@ -1,23 +1,39 @@
-<div class='row'>
+<div class='row justify-content-center'>
 <h3>Search for events</h3>
 </div>
-<div class='row justify-content-start'>
-  <div class='col-6'>
-  <form action='/events/results'>
-    <input type="text" name='keyword' placeholder="Enter a search term"> <label for="keyword">Search by keyword</label></br>
-  <% if (user) { %>
-      <% if (user.zipcode) { %>
-        <input type="text" name='zipcode' value="<%=user.zipcode%>" placeholder="Enter a Zipcode"> <label for="zipcode">Zipcode (Optional)</label></br>
-        <input type="text" name='radius' value='40' placeholder="Enter a Search Radius"> <label for="radius">Search Radius in Miles(Optional)</label></br>
-      <%  } else { %>
-        <input type="text" name='zipcode' placeholder="Enter a Zipcode"> <label for="zipcode">Optional</label></br>
-        <input type="text" name='radius'  placeholder="Enter a Search Radius"> <label for="radius">Optional</label></br>
+<form action='/events/results'>
+  <div class='row justify-content-center'>
+    <div class='col-12 col-sm-10 offset-sm-1 col-md-7 offset-md-1 col-lg-6 offset-lg-1 col-xl-5 offset-xl-1'>
+        <div class='row justify-content-start align-items-center text-left'>
+          <input class='input-block' type="text" name='keyword' placeholder="Enter a search term"> <label for="keyword">Search by keyword</label>
+        </div>
+      <% if (user) { %>
+          <% if (user.zipcode) { %>
+            <div class='row justify-content-start align-items-center text-left'>
+              <input class='input-block' type="text" name='zipcode' value="<%=user.zipcode%>" placeholder="Enter a Zipcode"> <label for="zipcode">Zipcode (Optional)</label>
+            </div>
+            <div class='row justify-content-start align-items-center text-left'>
+              <input class='input-block' type="text" name='radius' value='40' placeholder="Enter a Search Radius"> <label for="radius">Search Radius in Miles(Optional)</label>
+            </div>
+          <%  } else { %>
+            <div class='row justify-content-start align-items-center text-left'>
+              <input class='input-block' type="text" name='zipcode' placeholder="Enter a Zipcode"> <label for="zipcode">Optional</label>
+            </div>
+            <div class='row justify-content-start align-items-center text-left'>
+              <input class='input-block' type="text" name='radius'  placeholder="Enter a Search Radius"> <label for="radius">Optional</label>
+            </div>
+          <% }; %>
+      <% } else { %>
+        <div class='row justify-content-start align-items-center text-left'>
+          <input class='input-block' type="text" name='zipcode' placeholder="Enter a Zipcode"> <label for="zipcode">Optional</label>
+        </div>
+        <div class='row justify-content-start align-items-center text-left'>
+          <input class='input-block' type="text" name='radius'  placeholder="Enter a Search Radius"> <label for="radius">Optional</label>
+        </div>
       <% }; %>
-  <% } else { %>
-    <input type="text" name='zipcode' placeholder="Enter a Zipcode"> <label for="zipcode">Optional</label></br>
-    <input type="text" name='radius'  placeholder="Enter a Search Radius"> <label for="radius">Optional</label></br>
-  <% }; %>
-    <input type="submit" value='Search'>
-  </form>
+    </div>
   </div>
-</div>
+  <div class='row justify-content-center align-items-center text-left'>
+    <input class='input-block' type="submit" value='Search'>
+  </div>
+</form>

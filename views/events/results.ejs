@@ -1,32 +1,54 @@
-<h3> Results </h3>
-<% results.forEach(function(event) { %>
-  <a href="<%=event.url%>"><img style='width:300px' src="<%= event.images[3].url%>"></a>
-  <h2>
-    <%= event.name %>
-    <small><%=event.dates.start.localDate %></small>
-    <div style='display:inline-block'>
-      <form action="/favorites" method='post'>
-        <input type='submit' class='btn save-link' value="Add to Saved Events">
-        <input type="hidden" name='ticketmasterId' value="<%=event.id%>">
-        <input type="hidden" name='name' value="<%=event.name%>">
-        <input type="hidden" name='purchaseUrl' value="<%=event.url%>">
-        <input type="hidden" name='imageUrl' value="<%=event.images[3].url%>">
-        <input type="hidden" name='date' value="<%=event.dates.start.localDate%>">
-        <input type="hidden" name='venue' value="<%=event._embedded.venues[0].name%>">
-        <input type="hidden" name='location' value="<%=event._embedded.venues[0].city.name%>, <%= event._embedded.venues[0].state.stateCode %>">
-      </form>
-    </div>
-  </h2>
-  <h6><a href="/events/results?keyword=<%=event._embedded.venues[0].name%>"><%= event._embedded.venues[0].name %></a> &nbsp;&nbsp;&nbsp;(<%= event._embedded.venues[0].city.name %>, <%= event._embedded.venues[0].state.stateCode %> )</h6>
+<div class='row justify-content-center'>
+  <h3> Results </h3>
+</div>
+<% let count=0; %>
+<% let backgroundClass = "background-1"; %>
 
-  <% if (event._embedded.attractions) { %>
-    <% if (event._embedded.attractions.length > 1 && (event.classifications[0].segment.name == "Music")) { %>
-      <h5>Featured:</h5>
-      <ul>
-        <% for (i = 0; i < event._embedded.attractions.length; i++) { %>
-          <a href="/events/results?keyword=<%=event._embedded.attractions[i].name%>"><li><%= event._embedded.attractions[i].name %></li></a>
-        <% }; %>
-      </ul>
-    <% } %>
+<% results.forEach(function(event) { %>
+
+  <% if (count % 2 != 0) { %>
+  <% backgroundClass = "background-2" %>
+  <% } else { %>
+  <% backgroundClass = "background-1"; %>
   <% } %>
+  <% count++; %>
+  
+  <div class='row justify-content-center text-center event-info-box <%=backgroundClass%>'>
+    <div class='col'>
+      <div class='row justify-content-center'>
+          <a href="<%=event.url%>"><img style='width:300px' src="<%= event.images[3].url%>"></a>
+      </div>
+      <div>
+        <h2><%= event.name %></h2>
+        <h6><%=event.dates.start.localDate %></h6>
+        <div>
+          <form action="/favorites" method='post'>
+            <input type='submit' class='btn save-link' value="Add to Saved Events">
+            <input type="hidden" name='ticketmasterId' value="<%=event.id%>">
+            <input type="hidden" name='name' value="<%=event.name%>">
+            <input type="hidden" name='purchaseUrl' value="<%=event.url%>">
+            <input type="hidden" name='imageUrl' value="<%=event.images[3].url%>">
+            <input type="hidden" name='date' value="<%=event.dates.start.localDate%>">
+            <input type="hidden" name='venue' value="<%=event._embedded.venues[0].name%>">
+            <input type="hidden" name='location' value="<%=event._embedded.venues[0].city.name%>, <%= event._embedded.venues[0].state.stateCode %>">
+          </form>
+        </div>
+      </div>
+        <div class='row justify-content-center'>
+          <div class='col-4 venue-info'>
+            <h6><a href="/events/results?keyword=<%=event._embedded.venues[0].name%>"><%= event._embedded.venues[0].name %></a> &nbsp;&nbsp;&nbsp;(<%= event._embedded.venues[0].city.name %>, <%= event._embedded.venues[0].state.stateCode %> )</h6>
+            <% if (event._embedded.attractions) { %>
+              <% if (event._embedded.attractions.length > 1 && (event.classifications[0].segment.name == "Music")) { %>
+                <h5>Featured:</h5>
+                <ul>
+                  <% for (i = 0; i < event._embedded.attractions.length; i++) { %>
+                    <a href="/events/results?keyword=<%=event._embedded.attractions[i].name%>"><li><%= event._embedded.attractions[i].name %></li></a>
+                  <% }; %>
+                </ul>
+              <% } %>
+            <% } %>
+          </div>
+        </div>
+    </div>
+  </div>
 <% }); %>

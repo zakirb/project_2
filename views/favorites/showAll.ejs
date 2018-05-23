@@ -1,21 +1,33 @@
-<h1>My Favorites</h1>
 <div class='row justify-content-center'>
-  <div class='col-4'>
+  <h1>My Favorites</h1>
+</div>
+<% let count=0; %>
+<% let backgroundClass = "background-1"; %>
+
 <% events.forEach(function(event) { %>
 
-  <a href="/favorites/<%=event.ticketmaster_id%>"><img style='width:300px' src="<%= event.image_url%>"></a>
-  <h2>
-    <%= event.name %>
-    <small><%=event.date %></small>
-  </h2>
-  <h6><%= event.venue %> &nbsp;&nbsp;&nbsp;(<%= event.location %> )</h6>
-  <div>
-    <a href="<%=event.purchase_url%>"><div class='btn'>Purchase Tickets</div></a>
-    <div href="/favorites/<%=event.ticketmaster_id%>" class='btn delete-link'>Delete From Favorites</div>
+  <% if (count % 2 != 0) { %>
+  <% backgroundClass = "background-2" %>
+  <% } else { %>
+  <% backgroundClass = "background-1"; %>
+  <% } %>
+  <% count++; %>
+  <div class='row py-3 justify-content-center text-center <%=backgroundClass%>'>
+    <div class='col-4'>
+      <a href="/favorites/<%=event.ticketmaster_id%>"><img style='width:300px' src="<%= event.image_url%>"></a>
+      <h2>
+        <%= event.name %>
+        <small><%=event.date %></small>
+      </h2>
+      <h6><%= event.venue %> &nbsp;&nbsp;&nbsp;(<%= event.location %> )</h6>
+      <div>
+        <a href="<%=event.purchase_url%>"><div class='btn'>Purchase Tickets</div></a>
+        <div href="/favorites/<%=event.ticketmaster_id%>" class='btn delete-link'>Delete From Favorites</div>
+      </div>
+    </div>
   </div>
 <% }); %>
-</div>
-</div>
+
 
 <script>
 $('.delete-link').on('click', function() {

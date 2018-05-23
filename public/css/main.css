@@ -1,11 +1,54 @@
-/* body {
-  text-align:center;
+#outerbody {
+background-image: linear-gradient(to right top,  rgba(120,120,120,0.9), rgba(140,140,140,.7), rgba(120,120,120,0.9) );
+height: 100%;
+min-height: 100vh;
 }
 
-div {
-  border: solid black 1px;
+#innerbody {
+  width: 100vw;
+}
+
+.background-1 {
+  background-image: repeating-linear-gradient(to right top,  rgba(140,140,140,0.7), rgba(50,50,50,.1), rgba(140,140,140,0.7));
+}
+
+.background-2 {
+  background-image: repeating-linear-gradient(to right top, rgba(90,90,90,.4),rgba(160,160,160,0.9),rgba(140,140,140,.7));
+}
+
+/* div {
+  border: solid 1px black;
 } */
+
 
 a {
   text-decoration: none;
+}
+
+.venue-info {
+  margin-top: 1vh;
+}
+a {
+  color: #21252A;
+}
+.event-info-box {
+  padding-top: 3vh;
+  padding-bottom: 3vh;
+}
+
+.save-link {
+  background-color: rgba(245,245,245,0.5);
+}
+
+.navbar-brand {
+  text-align: center;
+  /* border: solid rgba(0,0,0,0.1) 1px; */
+  margin:4px;
+  padding: 5px 15px;
+  border-radius: 5px;
+  background-color: rgba(245,245,245,0.5);
+}
+
+.input-block {
+  margin: 4px;
 }
