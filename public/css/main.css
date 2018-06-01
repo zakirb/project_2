@@ -18,18 +18,16 @@ min-height: 100vh;
 }
 
 .background-1 {
-  /* background-image: repeating-linear-gradient(to right top,  rgba(140,140,140,0.7), rgba(50,50,50,.1), rgba(140,140,140,0.7)); */
   background-color: rgba(0,0,0,.1);
 }
 
 .background-2 {
-  /* background-image: repeating-linear-gradient(to right top, rgba(90,90,90,.4),rgba(160,160,160,0.9),rgba(140,140,140,.7)); */
   background-color: rgba(0,0,0,.3);
 }
 
-/* div {
+div {
   border: solid 1px black;
-} */
+}
 
 
 a {
@@ -47,7 +45,7 @@ a {
   padding-bottom: 3vh;
 }
 
-.save-link {
+.save-link, .delete-link {
   background-color: rgba(245,245,245,0.5);
 }
 

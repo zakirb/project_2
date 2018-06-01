@@ -13,7 +13,7 @@
   <% } %>
   <% count++; %>
   <div class='row py-3 justify-content-center text-center <%=backgroundClass%>'>
-    <div class='col-4'>
+    <div class='col'>
       <a href="/favorites/<%=event.ticketmaster_id%>"><img style='width:300px' src="<%= event.image_url%>"></a>
       <h2>
         <%= event.name %>
@@ -21,7 +21,7 @@
       </h2>
       <h6><%= event.venue %> &nbsp;&nbsp;&nbsp;(<%= event.location %> )</h6>
       <div>
-        <a href="<%=event.purchase_url%>"><div class='btn'>Purchase Tickets</div></a>
+        <a href="<%=event.purchase_url%>"><div class='btn save-link'>Purchase Tickets</div></a>
         <div href="/favorites/<%=event.ticketmaster_id%>" class='btn delete-link'>Delete From Favorites</div>
       </div>
     </div>
