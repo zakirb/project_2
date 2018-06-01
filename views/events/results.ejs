@@ -12,11 +12,16 @@
   <% backgroundClass = "background-1"; %>
   <% } %>
   <% count++; %>
-  
+
   <div class='row justify-content-center text-center event-info-box <%=backgroundClass%>'>
     <div class='col'>
       <div class='row justify-content-center'>
-          <a href="<%=event.url%>"><img style='width:300px' src="<%= event.images[3].url%>"></a>
+        <div class='event-image-container'>
+          <a href="<%=event.url%>">
+            <img class='event-image' src="<%= event.images[3].url%>">
+            <div class='image-overlay'><div class='image-overlay-text'>Purchase Tickets</div></div>
+          </a>
+        </div>
       </div>
       <div>
         <h2><%= event.name %></h2>

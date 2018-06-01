@@ -1,31 +1,40 @@
-<div class='row event-info-box justify-content-center'>
-  <div class='col-4'>
-  <a href="<%=event.url%>"><img style='width:300px' src="<%= event.images[3].url%>"></a>
-  <h2>
-    <%= event.name %>
-    <small><%=event.dates.start.localDate %></small>
-  </h2>
-  <h6>
-  <%= event._embedded.venues[0].name %></a> &nbsp;&nbsp;&nbsp;(<%= event._embedded.venues[0].city.name %>, <%= event._embedded.venues[0].state.stateCode %> )</h6>
-  <% if (event._embedded.attractions) { %>
-    <% if (event._embedded.attractions.length > 1 && (event.classifications[0].segment.name == "Music")) { %>
-      <h5>Featured:</h5>
-      <ul>
-        <% for (i = 0; i < event._embedded.attractions.length; i++) { %>
-          <li><%= event._embedded.attractions[i].name %></li>
-        <% }; %>
-      </ul>
-    <% } %>
-  <% } %>
+<div class='event-info-box'>
+  <div class='row'>
+    <div class='event-image-container'>
+      <a href="<%=event.url%>">
+        <img class='event-image' src="<%= event.images[3].url%>">
+        <div class='image-overlay'><div class='image-overlay-text'>Purchase Tickets</div></div>
+      </a>
+    </div>
+  </div>
+  <div class='row justify-content-center'>
+    <div class=' col-xl-4 col-lg-6 col-md-8 col-10'>
+      <h2>
+        <%= event.name %>
+        <small><%=event.dates.start.localDate %></small>
+      </h2>
+      <h6>
+        <%= event._embedded.venues[0].name %></a> &nbsp;&nbsp;&nbsp;(<%= event._embedded.venues[0].city.name %>, <%= event._embedded.venues[0].state.stateCode %> )
+      </h6>
+      <% if (event._embedded.attractions) { %>
+        <% if (event._embedded.attractions.length > 1 && (event.classifications[0].segment.name == "Music")) { %>
+          <h5>Featured:</h5>
+          <ul>
+            <% for (i = 0; i < event._embedded.attractions.length; i++) { %>
+              <li><%= event._embedded.attractions[i].name %></li>
+            <% }; %>
+          </ul>
+        <% } %>
+      <% } %>
 
-<% if (artists) { %>
-  <h2>Reccomended artists based on your choice <small>(Click to view artist info)</small></h2>
-  <ul>
-    <% artists.forEach(function(artist) { %>
-      <a href="/reccomendations/<%=artist.Name%>"><li><%=artist.Name%></li></a>
-    <% }) %>
-  </ul>
+      <% if (artists) { %>
+        <h2>Reccomended artists based on your choice <small>(Click to view artist info)</small></h2>
+        <ul>
+          <% artists.forEach(function(artist) { %>
+            <a href="/reccomendations/<%=artist.Name%>"><li><%=artist.Name%></li></a>
+          <% }) %>
+        </ul>
+      <% } %>
+    </div>
   </div>
 </div>
-
-<% } %>

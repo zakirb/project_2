@@ -14,7 +14,12 @@
   <% count++; %>
   <div class='row py-3 justify-content-center text-center <%=backgroundClass%>'>
     <div class='col'>
-      <a href="/favorites/<%=event.ticketmaster_id%>"><img style='width:300px' src="<%= event.image_url%>"></a>
+      <div class='event-image-container'>
+        <a href="/favorites/<%=event.ticketmaster_id%>">
+          <img class='event-image' src="<%= event.image_url%>">
+          <div class='image-overlay'><div class='image-overlay-text'>Details</div></div>
+        </a>
+      </div>
       <h2>
         <%= event.name %>
         <small><%=event.date %></small>
