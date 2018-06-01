@@ -19,7 +19,7 @@
   <% } %>
 
 <% if (artists) { %>
-  <h2>Reccomended artists based on your choice</h2>
+  <h2>Reccomended artists based on your choice <small>(Click to view artist info)</small></h2>
   <ul>
     <% artists.forEach(function(artist) { %>
       <a href="/reccomendations/<%=artist.Name%>"><li><%=artist.Name%></li></a>
